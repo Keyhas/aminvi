@@ -5,6 +5,8 @@ import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
 import {MenubarModule} from 'primeng/menubar';
 import { FormsModule } from '@angular/forms';
+import {CardModule} from 'primeng/card';
+
 
 
 @NgModule({
@@ -15,12 +17,14 @@ import { FormsModule } from '@angular/forms';
     InputTextModule,
     ButtonModule,
     MenubarModule,
+    CardModule,
   ],
   exports: [
     LoginComponent,
     InputTextModule,
     ButtonModule,
-    MenubarModule
+    MenubarModule,
+    CardModule
   ]
 })
 export class SharedModule { }
