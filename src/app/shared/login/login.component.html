@@ -1,0 +1,26 @@
+<h3 class="first">Iniciar sesión</h3>
+<div class="p-grid p-justify-between	">
+  <div class="p-col-12">
+    <div class="p-col-6">
+      <div class="ui-inputgroup">
+        <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
+        <input type="text" pInputText placeholder="Correo electronico" [(ngModel)]="credentials.email">
+      </div>
+    </div>
+    <div class="p-col-6">
+      <div class="ui-inputgroup">
+        <span class="ui-inputgroup-addon"><i class="fa fa-key"></i></span>
+        <input type="password" pInputText placeholder="Contraseña" [(ngModel)]="credentials.password">
+      </div>
+    </div>
+
+  </div>
+  <div class="p-col-12 p-justify-between	">
+    <div class="p-col">
+
+      <button pButton type="button" label="Confirmar" class="ui-button-rounded ui-button-success" (click)="doLogin()"></button>
+      <button pButton type="button" label="Limpiar" class="ui-button-rounded ui-button-warning" (click)="clear()"></button>
+    </div>
+
+  </div>
+</div>

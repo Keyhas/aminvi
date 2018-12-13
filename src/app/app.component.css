@@ -1,0 +1,10 @@
+.topbar {
+  background-color: #20272a;
+  height: 70px;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9997;
+}
