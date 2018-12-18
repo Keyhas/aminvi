@@ -16,7 +16,6 @@ test:
   image: cypress/base:10
   stage: test
   script:
-  
     - CYPRESS_INSTALL_BINARY=src\assets\cypress.zip npm install cypress
     - npm ci
     - $(npm bin)/cypress verify
