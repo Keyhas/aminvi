@@ -1,0 +1,13 @@
+{
+  "extends": "../tsconfig.json",
+  "include": [
+    // "../src/**/*.ts",
+    "integration/*.ts",
+    "support/*.ts",
+    "../node_modules/cypress"
+  ],
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  }
+}

@@ -13,12 +13,12 @@ export class AuthService {
   user: Observable<firebase.User>;
 
   constructor(
-    private af: AngularFireModule,
-    public fAuth: AngularFireAuth ) {
+    // private af?: AngularFireModule,
+    public fAuth?: AngularFireAuth ) {
      this.user = fAuth.authState;
   }
 
-  doMailLogin(credentials: EmailPasswordCredentials) {
+  public doMailLogin(credentials: EmailPasswordCredentials) {
     this.fAuth
     .auth
     .signInWithEmailAndPassword(credentials.email, credentials.password)

@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
     console.log(this.credentials);
   }
   doLogin() {
+    console.log('this.credentials: ', this.credentials);
     this.auth.doMailLogin(this.credentials);
   }
 
