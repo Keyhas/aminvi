@@ -16,10 +16,7 @@ test:
   image: cypress/base:10
   stage: test
   script:
-    # npm config set unsafe-perm true
-    # npm install npm@latest -g
-    # npm install -g @angular/cli@1.6.7
-    # npm install --unsafe-perm
+    - npm install
     - $(npm bin)/cypress verify
     # print CI environment variables for reference
     - $(npm bin)/print-env CI
