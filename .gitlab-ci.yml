@@ -18,7 +18,7 @@ install:
   stage: build
 
   script:
-    - npm ci
+    - npm ci --unsafe-perm
     - $(npm bin)/cypress verify
 
 
