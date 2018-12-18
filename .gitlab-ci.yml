@@ -16,7 +16,7 @@ test:
   image: cypress/base:10
   stage: test
   script:
-    - npm -v
+    - npx cypress verify
     # print CI environment variables for reference
     - $(npm bin)/print-env CI
     # make sure Cypress can run
