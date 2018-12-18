@@ -16,7 +16,9 @@ test:
   image: cypress/base:10
   stage: test
   script:
-    - npm install -q || npm ci
+  
+    - CYPRESS_INSTALL_BINARY=src\assets\cypress.zip npm install cypress
+    - npm ci
     - $(npm bin)/cypress verify
     # print CI environment variables for reference
     - $(npm bin)/print-env CI
