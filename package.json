@@ -10,9 +10,7 @@
     "e2e": "ng e2e",
     "cy:verify": "cypress verify",
     "start:ci": "http-server app -c-1 --silent",
-    "e2e:record": "cypress run --record",
-
-
+    "e2e:record": "cypress run --record"
   },
   "private": true,
   "dependencies": {
