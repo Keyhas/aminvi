@@ -18,6 +18,7 @@ install:
   stage: build
 
   script:
+    - printenv
     - npm ci --unsafe-perm
     - $(npm bin)/cypress verify
 
