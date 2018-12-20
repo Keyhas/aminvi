@@ -28,6 +28,7 @@ test:
   stage: test
   script:
     # npm ci
+    - printenv
     # $(npm bin)/cypress verify
     # print CI environment variables for reference
     - $(npm bin)/print-env CI
