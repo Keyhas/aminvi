@@ -1,4 +1,4 @@
-.topbar {
+.layout-topbar {
   background-color: #20272a;
   height: 70px;
   box-sizing: border-box;
@@ -7,4 +7,8 @@
   left: 0;
   width: 100%;
   z-index: 9997;
+}
+.layout-main{
+  padding-top: 90px;
+  width: 100%;
 }

@@ -10,6 +10,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 import { AuthService } from './services/auth.service';
 import { SharedModule } from './shared/shared.module';
+import { MessageService } from 'primeng/components/common/messageservice';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +27,7 @@ import { SharedModule } from './shared/shared.module';
   exports: [
     SharedModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

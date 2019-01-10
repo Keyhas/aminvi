@@ -11,10 +11,10 @@ export class LoginComponent implements OnInit {
   constructor( private auth: AuthService) { }
 
   ngOnInit() {
-    console.log(this.credentials);
+    // console.log(this.credentials);
   }
   doLogin() {
-    console.log('this.credentials: ', this.credentials);
+    // console.log('this.credentials: ', this.credentials);
     this.auth.doMailLogin(this.credentials);
   }
 

@@ -1,17 +1,19 @@
 <p-card [style]="{width: '360px'}" styleClass="ui-card-shadow">
   <p-header>
-    <h3 class="first">Iniciar sesión</h3>
+    <div class="p-grid p-justify-center">
+      <h3 class="first">Iniciar sesión</h3>
+    </div>
   </p-header>
 
-  <div class="p-grid p-justify-between	">
-    <div class="p-col-12">
-      <div class="p-col-6">
+  <div class="p-grid ui-fluid p-justify-center">
+    <div class="p-col-12 p-col-align-center">
+      <div class="p-col-12">
         <div class="ui-inputgroup">
           <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
           <input type="text" pInputText name="email" placeholder="Correo electronico" [(ngModel)]="credentials.email">
         </div>
       </div>
-      <div class="p-col-6">
+      <div class="p-col-12">
         <div class="ui-inputgroup">
           <span class="ui-inputgroup-addon"><i class="fa fa-key"></i></span>
           <input type="password" pInputText name="password" placeholder="Contraseña" [(ngModel)]="credentials.password">
@@ -22,13 +24,13 @@
 
   </div>
   <p-footer>
-    <div class="p-col-12 p-justify-between	">
-      <div class="p-col">
+    <div class="p-grid p-justify-between	">
+      <!-- <div class="p-col-12"> -->
 
-        <button pButton type="submit" label="Confirmar" class="ui-button-rounded ui-button-success" (click)="doLogin()"></button>
-        <button pButton type="button" label="Limpiar" class="ui-button-rounded ui-button-warning" (click)="clear()"></button>
-      </div>
-
+      <button pButton type="submit" label="Confirmar" class="ui-button-rounded ui-button-success p-col-5" (click)="doLogin()"></button>
+      <button pButton type="button" label="Limpiar" class="ui-button-rounded ui-button-warning p-col-5" (click)="clear()"></button>
     </div>
+
+    <!-- </div> -->
   </p-footer>
 </p-card>

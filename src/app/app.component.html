@@ -1,19 +1,38 @@
-<ng-container *ngIf="(authService.user | async); else loginTemplate">
+<div class="layout-topbar">
+  <span>Am</span><span>I</span><span>nvi</span><span> 2.0</span>
+  tipografia = ultrafresh
 
-  <div>
+  <i class="logout fas fa-power-off" (click)="doLogout()" *ngIf="(authService.user | async)"></i>
+</div>
+<div class="layout-main">
+  <p-toast position="top-right" class="toast"></p-toast>
 
-    <div style="text-align:center">
-      <h1>
-        Welcome to {{ title }}!
-      </h1>
-    </div>
-    <h2>Here are some links to help you start: </h2>
-    <button (click)="doLogout()" label="logout"></button>
+  <div class="layout-content">
+
+    <ng-container *ngIf="(authService.user | async); else loginTemplate">
+
+      <p-tabView>
+        <p-tabPanel header="Regalo a..." leftIcon="fas fa-gifts">
+          <app-gifted></app-gifted>
+        </p-tabPanel>
+        <p-tabPanel header="Mi lista de deseos" leftIcon="fas fa-shopping-basket">
+          <app-wishlist></app-wishlist>
+        </p-tabPanel>
+
+        <p-tabPanel header="Admin" leftIcon="fas fa-admin" *ngIf="(authService.user.email==='iarranz92@gmail.com' | async)">
+
+        </p-tabPanel>
+
+      </p-tabView>
+
+    </ng-container>
+    <ng-template #loginTemplate>
+      <div class="p-grid  p-justify-center p-align-center	">
+        <app-login></app-login>
+      </div>
+    </ng-template>
   </div>
-
-</ng-container>
-<ng-template #loginTemplate>
-  <app-login></app-login>
-</ng-template>
-
-
+  <div class="layout-footer">
+    footer
+  </div>
+</div>

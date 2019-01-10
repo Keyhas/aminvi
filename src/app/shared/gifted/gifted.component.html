@@ -1,0 +1,23 @@
+<div class="p-grid ui-fluid p-justify-center p-align-center">
+  <div class="p-col-12">
+    <h1>Hola Usuario, te toca regalar a: </h1>
+  </div>
+  <div class="p-col-12">
+
+    <p-card [style]="{width: '360px'}" styleClass="ui-card-shadow">
+      <p-header>
+        Regalado!
+        <img src="Card" src="assets/showcase/images/usercard.png" alt="picture" [hidden]="!showGifted">
+      </p-header>
+      <div [hidden]="!showWishlist">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae
+        numquam
+        deserunt
+        quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque
+        quas!</div>
+      <p-footer>
+        <button pButton type="button" label="Ver quien me toca" icon="fa fa-user" style="margin-right: .25em" (click)="showGiftedToggle()"></button>
+        <button pButton type="button" label="Ver su lista de deseos" icon="fas fa-gift" class="ui-button-secondary" (click)="showWishlistToggle()"></button>
+      </p-footer>
+    </p-card>
+  </div>
+</div>
