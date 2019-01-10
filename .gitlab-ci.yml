@@ -11,13 +11,26 @@ cache:
   paths:
     - .npm
     - cache/Cypress
+    
+ # this job installs NPM dependencies and Cypress
+install:
+  image: cypress/base:10
+  stage: build
+
+  script:
+    - printenv
+    - npm ci --unsafe-perm
+    - $(npm bin)/cypress verify
+
+
 
 test:
   image: cypress/base:10
   stage: test
   script:
-    - npm ci
-    - $(npm bin)/cypress verify
+    # npm ci
+    - printenv
+    # $(npm bin)/cypress verify
     # print CI environment variables for reference
     - $(npm bin)/print-env CI
     # make sure Cypress can run
