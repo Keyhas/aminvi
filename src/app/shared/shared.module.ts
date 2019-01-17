@@ -12,11 +12,15 @@ import {ToastModule} from 'primeng/toast';
 import {TabViewModule} from 'primeng/tabview';
 import { GiftedComponent } from './gifted/gifted.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
+import { AdminComponent } from './admin/admin.component';
+import {TableModule} from 'primeng/table';
+import {DialogModule, Dialog} from 'primeng/dialog';
+
 
 
 
 @NgModule({
-  declarations: [LoginComponent, GiftedComponent, WishlistComponent],
+  declarations: [LoginComponent, GiftedComponent, WishlistComponent, AdminComponent],
   imports: [
     CommonModule,
     BrowserAnimationsModule,
@@ -27,6 +31,8 @@ import { WishlistComponent } from './wishlist/wishlist.component';
     CardModule,
     ToastModule,
     TabViewModule,
+    TableModule,
+    DialogModule
   ],
   exports: [
     BrowserAnimationsModule,
@@ -37,8 +43,11 @@ import { WishlistComponent } from './wishlist/wishlist.component';
     CardModule,
     ToastModule,
     TabViewModule,
+    TableModule,
+    DialogModule,
     GiftedComponent,
     WishlistComponent,
+    AdminComponent
   ]
 })
 export class SharedModule { }

@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
-import { AngularFireModule } from '@angular/fire';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject, of } from 'rxjs';
 import { MessageService } from 'primeng/components/common/messageservice';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { switchMap, first } from 'rxjs/operators';
+import { StringMap } from '@angular/core/src/render3/jit/compiler_facade_interface';
 
 @Injectable( {
   providedIn: 'root'
@@ -11,13 +13,22 @@ import { MessageService } from 'primeng/components/common/messageservice';
 export class AuthService {
 
   authState: any = null;
-  user: Observable<firebase.User>;
+  user: BehaviorSubject<firebase.User> = new BehaviorSubject( null );
 
   constructor(
     // private af?: AngularFireModule,
     public fAuth: AngularFireAuth,
-    private msg: MessageService ) {
-    this.user = fAuth.authState;
+    private msg: MessageService,
+    private db: AngularFirestore ) {
+    this.authState = fAuth.authState;
+    this.fAuth.authState.pipe(
+      switchMap( user => {
+        if ( user ) {
+          return this.db.doc<any>( 'users/${user.uid}' ).valueChanges();
+        } else {
+          return of( null );
+        }
+      } ) );
   }
 
   public doMailLogin( credentials: EmailPasswordCredentials ) {
@@ -42,8 +53,52 @@ export class AuthService {
       .auth
       .signOut();
   }
+
+  getUser() {
+    return this.user.pipe( first() ).toPromise();
+  }
+  private updateUser( userData: UserData ) {
+    const userRef: AngularFirestoreDocument<any> = this.db.doc( 'users/${user.id}' );
+
+    return userRef.set( userData, { merge: true } );
+  }
+
+  getAllUsers() {
+    const colRef = this.db.collection( 'users' );
+    return colRef.get();
+    // .subscribe( ( query ) => {
+    //   console.log('query: ', query);
+    //   return query.docs;
+
+    // } );
+  }
+
+  createUser( userData: UserData, pass: string ) {
+    this.fAuth.auth.createUserWithEmailAndPassword( userData.email, pass ).then( _user => {
+      userData.email = _user.user.email;
+      userData.uid = _user.user.uid;
+      userData.firstTime = true;
+      _user.user.displayName = userData.name;
+      _user.user.photoURL = userData.photo;
+      this.db.doc( 'users/${user.id}' ).set( userData );
+    } );
+  }
+
+  deleteUser( userData: UserData ) {
+
+  }
 }
 export class EmailPasswordCredentials {
   email = '';
   password = '';
+}
+
+export class UserData {
+  uid: string;
+  name: string;
+  email: string;
+  photo: string;
+  wishlist: string[];
+  relatedTo: string[];
+  firstTime: boolean;
 }
