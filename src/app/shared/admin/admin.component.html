@@ -12,41 +12,61 @@
       <ng-template pTemplate="body" let-rowData>
         <tr>
           <td [pEditableColumn]="rowData" [pEditableColumnField]="'name'">
-<p-cellEditor>
+            <p-cellEditor>
               <ng-template pTemplate="input">
-                  <input pInputText type="text" [(ngModel)]="rowData.name">
+                <input pInputText type="text" [(ngModel)]="rowData.name">
               </ng-template>
               <ng-template pTemplate="output">
-                  {{rowData.name }}
-              </ng-template></p-cellEditor>
+                {{rowData.name }}
+              </ng-template>
+            </p-cellEditor>
           </td>
           <td>{{ rowData.email }}</td>
           <td [pEditableColumn]="rowData" [pEditableColumnField]="'photo'">
             {{ rowData.photo }}
           </td>
           <td [pEditableColumn]="rowData" [pEditableColumnField]="'relationship'">
-            dropdown rels
+            <p-dropdown [options]="relationshipsList" [(ngModel)]="selectedCity" placeholder="slecciona una relación"
+              optionLabel="name" [showClear]="true"></p-dropdown>
           </td>
         </tr>
       </ng-template>
       <ng-template pTemplate="summary" let-rowData>
-          <div style="text-align:right">
-              <button type="button" pButton icon="fa fa-plus" (click)="showDialogToAdd()" label="Add"></button>
-          </div>
+        <div style="text-align:right">
+          <button type="button" pButton icon="fa fa-plus" (click)="showDialogToAdd()" label="Add"></button>
+        </div>
       </ng-template>
     </p-table>
   </div>
 </div>
-<p-dialog header="Nuevo miembro" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '300px'}">
-    <div class="p-grid">
-      <div class="p-col">nombre</div>
-      <div class="p-col">mail</div>
-      <div class="p-col">parentesco</div>
+<p-dialog header="Nuevo miembro" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"
+  [style]="{width: '300px'}">
+  <div class="p-grid">
+    <div class="p-col-12 p-align-center	">
+
+      <div class="p-col">
+        <span class="ui-float-label">
+          <input id="float-input" type="text" size="30" pInputText>
+          <label for="float-input">Usuario</label>
+        </span>
+      </div>
+      <div class="p-col">
+          <span class="ui-float-label">
+              <input id="float-input" type="text" size="30" pInputText>
+              <label for="float-input">Correo</label>
+            </span>
+      </div>
+      <div class="p-col">
+        <p-dropdown [options]="relationshipsList" [(ngModel)]="selectedCity" placeholder="Select a City" optionLabel="name"
+          [showClear]="true"></p-dropdown>
+
+      </div>
     </div>
-    <p-footer>
-        <div class="ui-dialog-buttonpane ui-helper-clearfix">
-            <button type="button" pButton icon="fa fa-close" (click)="exit()" label="Exit"></button>
-            <button type="button" pButton icon="fa fa-check" (click)="saveNew()" label="Save"></button>
-        </div>
-    </p-footer>
+  </div>
+  <p-footer>
+    <div class="ui-dialog-buttonpane ui-helper-clearfix">
+      <button type="button" pButton icon="fa fa-times" (click)="exit()" label="Exit" class="ui-button-warning"></button>
+      <button type="button" pButton icon="fa fa-check" (click)="saveNew()" label="Save" class="ui-button-success"></button>
+    </div>
+  </p-footer>
 </p-dialog>

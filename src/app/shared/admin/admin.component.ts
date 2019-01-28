@@ -8,16 +8,20 @@ import { AuthService, UserData } from 'src/app/services/auth.service';
 } )
 export class AdminComponent implements OnInit {
 
-  userArr: UserData[];
+  userArr: any[];
   displayDialog = false;
+  relationshipsList: any[];
   constructor(
     private auth: AuthService
   ) { }
 
   ngOnInit() {
     this.auth.getAllUsers().subscribe( ( res ) => {
-      this.userArr = res.docs.map( el => el.data() );
-      this.userArr.map( usrEl => usrEl.uid = String( res.docs.forEach( el => el.id ) ) );
+      this.userArr = res.docs.map( el => {
+          const data = el.data();
+        console.log( el.id, data);
+        return {uid: el.id, ...data};
+      },  );
     } );
 
     console.log( 'this.userArr: ', this.userArr );
@@ -26,6 +30,7 @@ export class AdminComponent implements OnInit {
 
   showDialogToAdd() {
     this.displayDialog = true;
+    console.log(this.userArr);
   }
 
   exit() {

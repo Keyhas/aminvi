@@ -15,6 +15,7 @@ import { WishlistComponent } from './wishlist/wishlist.component';
 import { AdminComponent } from './admin/admin.component';
 import {TableModule} from 'primeng/table';
 import {DialogModule, Dialog} from 'primeng/dialog';
+import {DropdownModule} from 'primeng/dropdown';
 
 
 
@@ -32,7 +33,8 @@ import {DialogModule, Dialog} from 'primeng/dialog';
     ToastModule,
     TabViewModule,
     TableModule,
-    DialogModule
+    DialogModule,
+    DropdownModule
   ],
   exports: [
     BrowserAnimationsModule,
@@ -45,6 +47,7 @@ import {DialogModule, Dialog} from 'primeng/dialog';
     TabViewModule,
     TableModule,
     DialogModule,
+    DropdownModule,
     GiftedComponent,
     WishlistComponent,
     AdminComponent
