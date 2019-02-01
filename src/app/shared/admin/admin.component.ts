@@ -11,11 +11,13 @@ export class AdminComponent implements OnInit {
   userArr: any[];
   displayDialog = false;
   relationshipsList: any[];
+  newUser = new UserData();
   constructor(
     private auth: AuthService
   ) { }
 
   ngOnInit() {
+    console.log(this.newUser);
     this.auth.getAllUsers().subscribe( ( res ) => {
       this.userArr = res.docs.map( el => {
           const data = el.data();
@@ -23,7 +25,6 @@ export class AdminComponent implements OnInit {
         return {uid: el.id, ...data};
       },  );
     } );
-
     console.log( 'this.userArr: ', this.userArr );
 
   }
@@ -38,8 +39,8 @@ export class AdminComponent implements OnInit {
   }
 
   saveNew() {
+    this.auth.createUser(this.newUser, '123456');
     this.displayDialog = false;
-    alert( 'wip' );
   }
   updateUser( data ) {
     console.log( 'data: ', data );

@@ -40,24 +40,24 @@
   </div>
 </div>
 <p-dialog header="Nuevo miembro" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"
-  [style]="{width: '300px'}">
+  [style]="[{width: '300px'},{height: '300px'}]">
   <div class="p-grid">
     <div class="p-col-12 p-align-center	">
 
       <div class="p-col">
         <span class="ui-float-label">
-          <input id="float-input" type="text" size="30" pInputText>
+          <input id="float-input" type="text" size="30" pInputText [(ngModel)]="newUser.name">
           <label for="float-input">Usuario</label>
         </span>
       </div>
       <div class="p-col">
           <span class="ui-float-label">
-              <input id="float-input" type="text" size="30" pInputText>
+              <input id="float-input" type="text" size="30" pInputText [(ngModel)]="newUser.email">
               <label for="float-input">Correo</label>
             </span>
       </div>
       <div class="p-col">
-        <p-dropdown [options]="relationshipsList" [(ngModel)]="selectedCity" placeholder="Select a City" optionLabel="name"
+        <p-dropdown [options]="relationshipsList" [(ngModel)]="newUser.relatedTo[0]" placeholder="Select a City" optionLabel="name"
           [showClear]="true"></p-dropdown>
 
       </div>

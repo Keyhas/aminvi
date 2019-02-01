@@ -78,8 +78,10 @@ export class AuthService {
       userData.email = _user.user.email;
       userData.uid = _user.user.uid;
       userData.firstTime = true;
-      _user.user.displayName = userData.name;
-      _user.user.photoURL = userData.photo;
+      _user.user.updateProfile({
+        displayName: userData.name,
+        photoURL: userData.photo
+      });
       this.db.doc( 'users/${user.id}' ).set( userData );
     } );
   }
@@ -101,4 +103,12 @@ export class UserData {
   wishlist: string[];
   relatedTo: string[];
   firstTime: boolean;
+  constructor() {
+    this.name = '';
+    this.email = '';
+    this.photo = '';
+    this.wishlist = [];
+    this.relatedTo = [];
+    this.firstTime = true;
+  }
 }
