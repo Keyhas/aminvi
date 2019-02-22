@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
-import { Observable, BehaviorSubject, of } from 'rxjs';
+import { Observable, BehaviorSubject, of, from } from 'rxjs';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { switchMap, first } from 'rxjs/operators';
-import { StringMap } from '@angular/core/src/render3/jit/compiler_facade_interface';
+
 
 @Injectable( {
   providedIn: 'root'
@@ -73,21 +73,30 @@ export class AuthService {
     // } );
   }
 
-  createUser( userData: UserData, pass: string ) {
-    this.fAuth.auth.createUserWithEmailAndPassword( userData.email, pass ).then( _user => {
+  createUser( userData: UserData, pass: string ): Observable<any> {
+    return from(this.fAuth.auth.createUserWithEmailAndPassword( userData.email, pass ).then( _user => {
       userData.email = _user.user.email;
       userData.uid = _user.user.uid;
       userData.firstTime = true;
-      _user.user.updateProfile({
+      _user.user.updateProfile( {
         displayName: userData.name,
         photoURL: userData.photo
-      });
-      this.db.doc( 'users/${user.id}' ).set( userData );
-    } );
+      } );
+      // this.db.doc( 'users/${userData.id}' ).set( userData );
+      this.db.collection( 'users' ).doc( userData.uid ).set( {
+        uid: _user.user.uid,
+        name: userData.name,
+        email: _user.user.email,
+        photo: userData.photo,
+        wishlist: [],
+        relatedTo: userData.relatedTo,
+        firstTime: true
+      } );
+    } ));
   }
 
-  deleteUser( userData: UserData ) {
-
+  deleteUser( userData: UserData ): Observable<any> {
+    return from( this.db.collection( 'users' ).doc( userData.uid ).delete() );
   }
 }
 export class EmailPasswordCredentials {

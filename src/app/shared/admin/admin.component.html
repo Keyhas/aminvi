@@ -7,6 +7,7 @@
           <th>Correo</th>
           <th>Foto</th>
           <th>Relacion</th>
+          <th class="icon-cell">Borrar</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-rowData>
@@ -28,6 +29,9 @@
           <td [pEditableColumn]="rowData" [pEditableColumnField]="'relationship'">
             <p-dropdown [options]="relationshipsList" [(ngModel)]="selectedCity" placeholder="slecciona una relación"
               optionLabel="name" [showClear]="true"></p-dropdown>
+          </td>
+          <td class="icon-cell">
+            <i class="fa fa-trash" (click)="showDelete(rowData)"></i>
           </td>
         </tr>
       </ng-template>
@@ -57,7 +61,7 @@
             </span>
       </div>
       <div class="p-col">
-        <p-dropdown [options]="relationshipsList" [(ngModel)]="newUser.relatedTo[0]" placeholder="Select a City" optionLabel="name"
+        <p-dropdown [options]="relationshipsList" [(ngModel)]="newUser.relatedTo[0]" placeholder="Selecciona una relacion" optionLabel="name"
           [showClear]="true"></p-dropdown>
 
       </div>
@@ -70,3 +74,4 @@
     </div>
   </p-footer>
 </p-dialog>
+

@@ -16,6 +16,7 @@ import { AdminComponent } from './admin/admin.component';
 import {TableModule} from 'primeng/table';
 import {DialogModule, Dialog} from 'primeng/dialog';
 import {DropdownModule} from 'primeng/dropdown';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
 
 
 
@@ -34,7 +35,8 @@ import {DropdownModule} from 'primeng/dropdown';
     TabViewModule,
     TableModule,
     DialogModule,
-    DropdownModule
+    DropdownModule,
+    ConfirmDialogModule
   ],
   exports: [
     BrowserAnimationsModule,
@@ -48,6 +50,7 @@ import {DropdownModule} from 'primeng/dropdown';
     TableModule,
     DialogModule,
     DropdownModule,
+    ConfirmDialogModule,
     GiftedComponent,
     WishlistComponent,
     AdminComponent

@@ -11,6 +11,8 @@ import { environment } from '../environments/environment';
 import { AuthService } from './services/auth.service';
 import { SharedModule } from './shared/shared.module';
 import { MessageService } from 'primeng/components/common/messageservice';
+import { ConfirmationService } from 'primeng/components/common/confirmationservice';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +29,7 @@ import { MessageService } from 'primeng/components/common/messageservice';
   exports: [
     SharedModule
   ],
-  providers: [AuthService, MessageService],
+  providers: [AuthService, MessageService, ConfirmationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
