@@ -1,5 +1,5 @@
 <div class="p-grid">
-  <div class="p-col">
+  <div class="p-col" *ngIf="userArr">
     <p-table [value]="userArr" (onEditComplete)="updateUser($event)">
       <ng-template pTemplate="header">
         <tr>
@@ -27,8 +27,9 @@
             {{ rowData.photo }}
           </td>
           <td [pEditableColumn]="rowData" [pEditableColumnField]="'relationship'">
-            <p-dropdown [options]="relationshipsList" [(ngModel)]="selectedCity" placeholder="slecciona una relación"
-              optionLabel="name" [showClear]="true"></p-dropdown>
+            <!-- <p-dropdown [options]="relationshipsList" [(ngModel)]="selectedCity" placeholder="slecciona una relación"
+              optionLabel="name" [showClear]="true"></p-dropdown> -->
+              <p-multiSelect [options]="relationshipsList" [(ngModel)]="rowData.relatedTo" [panelStyle]="{minWidth:'12em'}" (onPanelHide)="updateUser(rowData)"></p-multiSelect>
           </td>
           <td class="icon-cell">
             <i class="fa fa-trash" (click)="showDelete(rowData)"></i>

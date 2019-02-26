@@ -57,10 +57,18 @@ export class AuthService {
   getUser() {
     return this.user.pipe( first() ).toPromise();
   }
-  private updateUser( userData: UserData ) {
+  updateUser( userData: UserData ): Observable<any> {
     const userRef: AngularFirestoreDocument<any> = this.db.doc( 'users/${user.id}' );
+    return from(this.db.collection('users').doc(userData.uid).set( {
+      uid: userData.uid,
+      name: userData.name,
+      email: userData.email,
+      photo: userData.photo ? userData.photo : '',
+      wishlist: userData.wishlist ? userData.wishlist : [],
+      relatedTo: userData.relatedTo ? userData.relatedTo : [],
+      firstTime: false
+    }, { merge: true } ));
 
-    return userRef.set( userData, { merge: true } );
   }
 
   getAllUsers() {

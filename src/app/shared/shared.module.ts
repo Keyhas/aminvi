@@ -17,6 +17,7 @@ import {TableModule} from 'primeng/table';
 import {DialogModule, Dialog} from 'primeng/dialog';
 import {DropdownModule} from 'primeng/dropdown';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {MultiSelectModule} from 'primeng/multiselect';
 
 
 
@@ -36,7 +37,8 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
     TableModule,
     DialogModule,
     DropdownModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    MultiSelectModule
   ],
   exports: [
     BrowserAnimationsModule,
@@ -50,6 +52,7 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
     TableModule,
     DialogModule,
     DropdownModule,
+    MultiSelectModule,
     ConfirmDialogModule,
     GiftedComponent,
     WishlistComponent,

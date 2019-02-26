@@ -23,14 +23,17 @@ export class AdminComponent implements OnInit {
 
   ngOnInit() {
     console.log( this.newUser );
+    this.relationshipsList = [];
     this.auth.getAllUsers().subscribe( ( res ) => {
       this.userArr = res.docs.map( el => {
         const data = el.data();
         console.log( el.id, data );
+        this.relationshipsList.push({label: data.name, value: el.id});
         return { uid: el.id, ...data };
       } );
+      console.log('this.relationshipsList: ', this.relationshipsList);
+      console.log( 'this.userArr: ', this.userArr );
     } );
-    console.log( 'this.userArr: ', this.userArr );
 
   }
 
@@ -53,12 +56,17 @@ export class AdminComponent implements OnInit {
   }
   updateUser( data ) {
     console.log( 'data: ', data );
-
+    this.auth.updateUser(data.data ? data.data : data).subscribe( res => {
+      this.msgs.add( { severity: 'success', summary: 'Confirmado', detail: 'Actualizado correctamente' } );
+    },
+    err => {
+      this.msgs.add( { severity: 'warning', summary: 'Cancelado', detail: 'Capachao?' } );
+    });
   }
-  deleteUser( data ) {
+  // deleteUser( data ) {
 
-    this.auth.deleteUser( data )
-  }
+  //   this.auth.deleteUser( data )
+  // }
 
   showDelete(selected) {
     // console.log( 'selected: ', selected );
