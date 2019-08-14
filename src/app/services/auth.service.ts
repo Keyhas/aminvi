@@ -14,6 +14,7 @@ export class AuthService {
 
   authState: any = null;
   user: BehaviorSubject<firebase.User> = new BehaviorSubject( null );
+  userUID: any = null;
 
   constructor(
     // private af?: AngularFireModule,
@@ -21,14 +22,11 @@ export class AuthService {
     private msg: MessageService,
     private db: AngularFirestore ) {
     this.authState = fAuth.authState;
-    this.fAuth.authState.pipe(
-      switchMap( user => {
-        if ( user ) {
-          return this.db.doc<any>( 'users/${user.uid}' ).valueChanges();
-        } else {
-          return of( null );
-        }
-      } ) );
+    this.authState.subscribe( state => {
+      if ( state ) {
+        this.userUID = state.uid;
+      }
+    } );
   }
 
   public doMailLogin( credentials: EmailPasswordCredentials ) {
@@ -37,6 +35,7 @@ export class AuthService {
       .signInWithEmailAndPassword( credentials.email, credentials.password )
       .then( val => {
         console.log( 'Logged' );
+        this.userUID = val.user.uid;
         this.msg.add( { severity: 'success', summary: 'Login correcto', detail: 'Has entrado correctamente' } );
       } )
       .catch( err => {
@@ -55,11 +54,11 @@ export class AuthService {
   }
 
   getUser() {
-    return this.user.pipe( first() ).toPromise();
+    return this.db.doc( 'users/' + this.userUID ).get();
   }
   updateUser( userData: UserData ): Observable<any> {
     const userRef: AngularFirestoreDocument<any> = this.db.doc( 'users/${user.id}' );
-    return from(this.db.collection('users').doc(userData.uid).set( {
+    return from( this.db.collection( 'users' ).doc( userData.uid ).set( {
       uid: userData.uid,
       name: userData.name,
       email: userData.email,
@@ -67,7 +66,7 @@ export class AuthService {
       wishlist: userData.wishlist ? userData.wishlist : [],
       relatedTo: userData.relatedTo ? userData.relatedTo : [],
       firstTime: false
-    }, { merge: true } ));
+    }, { merge: true } ) );
 
   }
 
@@ -82,7 +81,7 @@ export class AuthService {
   }
 
   createUser( userData: UserData, pass: string ): Observable<any> {
-    return from(this.fAuth.auth.createUserWithEmailAndPassword( userData.email, pass ).then( _user => {
+    return from( this.fAuth.auth.createUserWithEmailAndPassword( userData.email, pass ).then( _user => {
       userData.email = _user.user.email;
       userData.uid = _user.user.uid;
       userData.firstTime = true;
@@ -100,7 +99,7 @@ export class AuthService {
         relatedTo: userData.relatedTo,
         firstTime: true
       } );
-    } ));
+    } ) );
   }
 
   deleteUser( userData: UserData ): Observable<any> {

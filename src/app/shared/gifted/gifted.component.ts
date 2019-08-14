@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 
-@Component({
+@Component( {
   selector: 'app-gifted',
   templateUrl: './gifted.component.html',
-  styleUrls: ['./gifted.component.scss']
-})
+  styleUrls: [ './gifted.component.scss' ]
+} )
 export class GiftedComponent implements OnInit {
 
   showGifted = false;
@@ -13,14 +13,21 @@ export class GiftedComponent implements OnInit {
   user: any;
   constructor(
     private auth: AuthService,
-    ) { }
+  ) { }
 
   ngOnInit() {
-    this.auth.getUser().then( user => this.user = user );
+    this.auth.getUser().subscribe( ( doc ) => {
+      if ( doc.exists ) {
+        this.user = doc.data();
+      } else {
+        // doc.data() will be undefined in this case
+        console.log( "No such document!" );
+      }
+    } );
   }
 
   showWishlistToggle() {
-    console.log('this.auth.user: ', this.user);
+    console.log( 'this.auth.user: ', this.user );
     this.showWishlist = !this.showWishlist;
   }
 

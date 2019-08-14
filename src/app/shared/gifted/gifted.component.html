@@ -1,6 +1,6 @@
-<div class="p-grid ui-fluid p-justify-center p-align-center">
+<div class="p-grid ui-fluid p-justify-center p-align-center" *ngIf="user">
   <div class="p-col-12">
-    <h1>Hola Usuario, te toca regalar a: </h1>
+    <h1>Hola {{user.name}}, te toca regalar a: </h1>
   </div>
   <div class="p-col-12">
 
